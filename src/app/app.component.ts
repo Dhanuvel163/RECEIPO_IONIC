@@ -22,7 +22,9 @@ export class AppComponent {
     this.platform.ready().then(() => {
       console.log('Platform ready')
       //CUSTOM HIDE OF SPLASHSCREEN
-      this.splashScreen.hide();
+      setTimeout(() => {
+        this.splashScreen.hide();        
+      }, 1000);
     })
   }
 }
