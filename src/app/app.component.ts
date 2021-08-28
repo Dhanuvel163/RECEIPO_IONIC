@@ -8,7 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Home', url: '/allreceipes', icon: 'home' },
+    { title: 'Receipies', url: '/allreceipes', icon: 'beer' },
   ];
   constructor(
     private platform: Platform,

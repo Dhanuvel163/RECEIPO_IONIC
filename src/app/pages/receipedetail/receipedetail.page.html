@@ -1,9 +1,88 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>receipedetail</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{receipe.title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-label>Dark</ion-label>
+      <ion-toggle style="margin-left: 8px;" slot="start" name="cherry" color="dark" (ionChange)="changemode()"></ion-toggle>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
+  <div>
+    <img style="width: 100%;"
+    [src]="receipe.image || 'https://spoonacular.com/recipeImages/157106-312x231.jpg'" alt="">
+  </div>
+
+  <div style="padding: 10px;">
+    <h3>{{receipe.title}}</h3>
+    <h4 *ngIf="receipe?.diets?.length > 0">Diets</h4>
+    <p>
+      <ion-chip *ngFor="let item of receipe.diets" outline color="tertiary">
+        <ion-icon name="cafe"></ion-icon>
+        <ion-label>{{item}}</ion-label>
+      </ion-chip>
+    </p>
+  
+    <h4 *ngIf="receipe?.diets?.length > 0">Dish types</h4>
+    <p>
+      <ion-chip *ngFor="let item of receipe.dishTypes" outline color="tertiary">
+        <ion-icon name="restaurant"></ion-icon>
+        <ion-label>{{item}}</ion-label>
+      </ion-chip>
+    </p>
+
+    <h4 *ngIf="receipe.vegetarian">Types</h4>
+    <p *ngIf="receipe.vegetarian">
+      <ion-chip color="tertiary">
+        <ion-icon name="funnel"></ion-icon>
+        <ion-label>{{receipe.vegetarian?'Vegetarian':'Non Vegetarian'}}</ion-label>
+      </ion-chip>
+    </p>
+
+    <h4 *ngIf="receipe.readyInMinutes">Time</h4>
+    <p *ngIf="receipe.readyInMinutes">
+      <ion-chip outline color="tertiary">
+        <ion-icon name="timer"></ion-icon>
+        <ion-label>{{receipe.readyInMinutes}} minutes</ion-label>
+      </ion-chip>
+    </p>
+
+    <h4 style="margin-top: 10px;" *ngIf="receipe?.extendedIngredients?.length > 0">Ingredients</h4>
+    <div *ngFor="let item of receipe?.extendedIngredients">
+      <ion-list>
+        <ion-item>
+          <ion-avatar slot="start">
+            <ion-icon name="bulb"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{item.name}}</h2>
+            <h3>{{item.original}}</h3>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <h4 style="margin-top: 10px;" *ngIf="receipe?.analyzedInstructions?.[0]">Instructions</h4>
+    <div *ngIf="receipe?.analyzedInstructions?.[0]">
+      <ul>
+        <li *ngFor="let d of receipe?.analyzedInstructions?.[0]"> {{d.step}} </li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 10px;">Summary</h4>
+    <div [innerHtml]="receipe.summary"></div>
+
+    <div style="display: flex;justify-content: center;margin-top: 10px;margin-top: 10px;">
+      <a [href]="receipe.sourceUrl" target="_blank">
+        <ion-button color="primary">More info</ion-button>
+      </a>
+    </div>
+  </div>
+
 
 </ion-content>

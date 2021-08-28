@@ -21,8 +21,8 @@ export class AllreceipiesPage implements OnInit {
     document.body.classList.toggle('dark')
   }
   async getrandomreceipies(){
-    let res:any =await this.data.getrandomreceipies()
-    this.receipies = res.recipes
+    // let res:any =await this.data.getrandomreceipies()
+    // this.receipies = res.recipes
   }
 }
 

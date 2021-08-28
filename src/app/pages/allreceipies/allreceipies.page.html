@@ -3,10 +3,10 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Home</ion-title>
+    <ion-title>Receipes</ion-title>
     <ion-buttons slot="end">
       <ion-label>Dark</ion-label>
-      <ion-toggle slot="start" name="cherry" color="dark" (ionChange)="changemode()"></ion-toggle>
+      <ion-toggle style="margin-left: 8px;" slot="start" name="cherry" color="dark" (ionChange)="changemode()"></ion-toggle>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -14,10 +14,40 @@
 <ion-content [fullscreen]="true">
   <ion-card *ngFor="let item of receipies">
     <img [src]="item.image || 'https://spoonacular.com/recipeImages/157106-312x231.jpg'" style="width: 100%;"/>
-    <ion-card-header>
-      <ion-card-subtitle>{{item.title}}</ion-card-subtitle>
+    <ion-card-header routerLink="/receipedetail/{{item.id}}">
+      <ion-card-subtitle style="text-transform: capitalize;">{{item.title}}</ion-card-subtitle>
       <ion-card-title>{{item?.dishTypes?.[0]}}</ion-card-title>
     </ion-card-header>
     <ion-card-content [innerHtml]="item.summary"></ion-card-content>
   </ion-card>
+
+  <!-- <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="primary">Primary</ion-fab-button>
+  </ion-fab> -->
+
+  <!-- <ion-fab horizontal="center" vertical="center" slot="fixed">
+    <ion-fab-button color="light">
+      <ion-icon name="share"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="primary">
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="end">
+      <ion-fab-button color="dark">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="bottom">
+      <ion-fab-button color="secondary">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start">
+      <ion-fab-button color="light">
+        <ion-icon name="logo-google"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab> -->
 </ion-content>
