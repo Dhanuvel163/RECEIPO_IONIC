@@ -10,18 +10,24 @@ export class DataService {
   constructor(public http:HttpClient,public toastController: ToastController) {
   }
   favourites:any = JSON.parse(localStorage.getItem('fav')) || []
+
+  setFavs(){
+    this.favourites = JSON.parse(localStorage.getItem('fav')) || []
+  }
+  
   getrandomreceipies(){
-    // return this.http.get(`https://api.spoonacular.com/recipes/random?number=9&tags=vegetarian&apiKey=${environment.apiKey}`).toPromise()
+    return this.http.get(`https://api.spoonacular.com/recipes/random?number=9&tags=vegetarian&apiKey=${environment.apiKey}`).toPromise()
   }
 
   getreceipeDetail(id:any){
-    // return this.http.get(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${environment.apiKey}`).toPromise()
+    return this.http.get(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${environment.apiKey}`).toPromise()
   }
 
   favouriteReceipe(item:any){
     let index =  this.favourites.findIndex((d:any)=>d.id === item.id)
     if(index == -1){
       this.favourites.push(item)
+      console.log(this.favourites)
       localStorage.setItem('fav',JSON.stringify(this.favourites))
       this.showToast('Added to favourites','success')
     }else{
