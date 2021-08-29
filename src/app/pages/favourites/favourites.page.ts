@@ -44,4 +44,9 @@ export class FavouritesPage implements OnInit {
     await alert.present();
   }
 
+  reorderItems(ev) {
+    const itemMove = this.receipies.splice(ev.detail.from, 1)[0];
+    this.receipies.splice(ev.detail.to, 0, itemMove);
+    ev.detail.complete();
+  }
 }

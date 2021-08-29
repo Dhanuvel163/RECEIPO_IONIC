@@ -21,27 +21,42 @@
     <ion-card-content [innerHtml]="item.summary"></ion-card-content>
   </ion-card> -->
 
+  <!-- can be "xs", "sm", "md", "lg", or "xl" -->
+<!-- <ion-split-pane when="md">
+  medium size
+</ion-split-pane> -->
+
+<!-- can be any valid media query https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries -->
+<!-- <ion-split-pane when="(min-width: 40px)">
+  40px
+</ion-split-pane> -->
+
   <ion-list>
-    <ion-item-sliding id="item100" *ngFor="let item of data.favourites">
-      <ion-item>
-        <ion-avatar slot="start">
-          <img [src]="item.image || 'https://spoonacular.com/recipeImages/157106-312x231.jpg'"/>
-        </ion-avatar>
-        <ion-label>
-          <h2 routerLink="/receipedetail/{{item.id}}">{{item.title}}</h2>
-          <p>{{item?.dishTypes?.[0]}}</p>
-          <p [innerHtml]="item.summary"></p>
-        </ion-label>
-        <ion-note slot="end">
-          {{item.readyInMinutes}} mins
-        </ion-note>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="presentAlertConfirm(item.id)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+    <ion-reorder-group disabled="false" (ionItemReorder)="reorderItems($event)">
+      <ion-item-sliding id="item100" *ngFor="let item of data.favourites">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img [src]="item.image || 'https://spoonacular.com/recipeImages/157106-312x231.jpg'"/>
+          </ion-avatar>
+          <ion-label>
+            <h2 routerLink="/receipedetail/{{item.id}}">{{item.title}}</h2>
+            <p>{{item?.dishTypes?.[0]}}</p>
+            <p [innerHtml]="item.summary"></p>
+          </ion-label>
+          <!-- <ion-note slot="end">
+            {{item.readyInMinutes}} mins
+          </ion-note> -->
+          <ion-reorder slot="end">
+            <ion-icon name="reorder-two-outline"></ion-icon>
+          </ion-reorder>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="presentAlertConfirm(item.id)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-reorder-group>
   </ion-list>
 
   <!-- <ion-list>
