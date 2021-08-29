@@ -11,11 +11,11 @@ export class DataService {
   }
   favourites:any = JSON.parse(localStorage.getItem('fav')) || []
   getrandomreceipies(){
-    return this.http.get(`https://api.spoonacular.com/recipes/random?number=9&tags=vegetarian&apiKey=${environment.apiKey}`).toPromise()
+    // return this.http.get(`https://api.spoonacular.com/recipes/random?number=9&tags=vegetarian&apiKey=${environment.apiKey}`).toPromise()
   }
 
   getreceipeDetail(id:any){
-    return this.http.get(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${environment.apiKey}`).toPromise()
+    // return this.http.get(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${environment.apiKey}`).toPromise()
   }
 
   favouriteReceipe(item:any){
