@@ -67,22 +67,30 @@
       </ion-list>
     </div>
 
-    <h4 style="margin-top: 10px;" *ngIf="receipe?.analyzedInstructions?.[0]">Instructions</h4>
-    <div *ngIf="receipe?.analyzedInstructions?.[0]">
+    <h4 style="margin-top: 10px;" *ngIf="receipe?.analyzedInstructions?.[0]?.steps.length>0">Instructions</h4>
+    <div *ngIf="receipe?.analyzedInstructions?.[0]?.steps.length>0">
       <ul>
-        <li *ngFor="let d of receipe?.analyzedInstructions?.[0]"> {{d.step}} </li>
+        <li *ngFor="let d of receipe?.analyzedInstructions?.[0]?.steps"> {{d.step}} </li>
       </ul>
     </div>
 
-    <h4 style="margin-top: 10px;">Summary</h4>
+    <h4 style="margin-top: 10px;" *ngIf="receipe.summary">Summary</h4>
     <div [innerHtml]="receipe.summary"></div>
 
     <div style="display: flex;justify-content: center;margin-top: 10px;margin-top: 10px;">
-      <a [href]="receipe.sourceUrl" target="_blank">
+      <a *ngIf="receipe.sourceUrl" [href]="receipe.sourceUrl" target="_blank">
         <ion-button color="primary">More info</ion-button>
       </a>
     </div>
   </div>
 
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="receipe.id">
+    <ion-fab-button color="danger">
+      <ion-icon name="heart" *ngIf="!data.itemExistsinFav(receipe.id);else other_content" (click)="data.favouriteReceipe(receipe)"></ion-icon>
+      <ng-template #other_content>
+        <ion-icon name="heart-dislike" (click)="data.removeFavourite(receipe.id)"></ion-icon>
+      </ng-template>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

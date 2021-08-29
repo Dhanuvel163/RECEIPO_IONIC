@@ -11,10 +11,10 @@ export class ReceipedetailPage implements OnInit {
   darkmode:any = window.matchMedia('(prefers-color-scheme: dark)').matches
   constructor(public route:ActivatedRoute,public data:DataService) { 
     this.route.paramMap.subscribe((params:any)=>{
-      this.getreceipeDetail(params.params.id)
+      this.getreceipeDetailFunc(params.params.id)
     })
   }
-  async getreceipeDetail(id:any){
+  async getreceipeDetailFunc(id:any){ 
     this.receipe = await this.data.getreceipeDetail(id)
   }
   changemode(){

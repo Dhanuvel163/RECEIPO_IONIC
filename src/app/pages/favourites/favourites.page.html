@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Favourites</ion-title>
+    <ion-buttons slot="end">
+      <ion-label>Dark</ion-label>
+      <ion-toggle style="margin-left: 8px;" slot="start" name="cherry" color="dark" (ionChange)="changemode()"></ion-toggle>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let item of data.favourites">
+    <img [src]="item.image || 'https://spoonacular.com/recipeImages/157106-312x231.jpg'" style="width: 100%;"/>
+    <ion-card-header routerLink="/receipedetail/{{item.id}}">
+      <ion-card-subtitle style="text-transform: capitalize;">{{item.title}}</ion-card-subtitle>
+      <ion-card-title>{{item?.dishTypes?.[0]}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content [innerHtml]="item.summary"></ion-card-content>
+  </ion-card>
+
+</ion-content>
