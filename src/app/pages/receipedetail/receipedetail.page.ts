@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-receipedetail',
   templateUrl: './receipedetail.page.html',
@@ -9,13 +10,18 @@ import { DataService } from 'src/app/services/data.service';
 export class ReceipedetailPage implements OnInit {
   receipe:any={}
   darkmode:any = window.matchMedia('(prefers-color-scheme: dark)').matches
-  constructor(public route:ActivatedRoute,public data:DataService) { 
+  constructor(public route:ActivatedRoute,public data:DataService,public loadingController: LoadingController) { 
     this.route.paramMap.subscribe((params:any)=>{
       this.getreceipeDetailFunc(params.params.id)
     })
   }
   async getreceipeDetailFunc(id:any){ 
+    const loading = await this.loadingController.create({
+      message: 'Cooking data 🧑‍🍳'
+    });
+    await loading.present();
     this.receipe = await this.data.getreceipeDetail(id)
+    await loading.dismiss();
   }
   changemode(){
     document.body.classList.toggle('dark')

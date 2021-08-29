@@ -14,7 +14,7 @@ export class DataService {
   setFavs(){
     this.favourites = JSON.parse(localStorage.getItem('fav')) || []
   }
-  
+
   getrandomreceipies(){
     return this.http.get(`https://api.spoonacular.com/recipes/random?number=9&tags=vegetarian&apiKey=${environment.apiKey}`).toPromise()
   }
