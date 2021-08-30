@@ -9,6 +9,7 @@ import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { Network } from '@ionic-native/network/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -18,6 +19,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
     DataService,
     LocalNotifications,
     SocialSharing,
+    Network,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
