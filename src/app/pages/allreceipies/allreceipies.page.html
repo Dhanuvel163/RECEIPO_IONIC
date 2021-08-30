@@ -16,10 +16,10 @@
   <ion-row>
     <ion-col *ngFor="let item of receipies" size="12" size-sm="6" size-md="4" size-lg="4">
       <ion-card style="height: 100%;">
-        <img [src]="item.image || 'https://spoonacular.com/recipeImages/157106-312x231.jpg'" style="width: 100%;"/>
+        <img routerLink="/receipedetail/{{item.id}}" [src]="item.image || 'https://spoonacular.com/recipeImages/157106-312x231.jpg'" style="width: 100%;"/>
         <ion-card-header routerLink="/receipedetail/{{item.id}}">
-          <ion-card-subtitle style="text-transform: capitalize;">{{item.title}}</ion-card-subtitle>
-          <ion-card-title>{{item?.dishTypes?.[0]}}</ion-card-title>
+          <ion-card-subtitle style="text-transform: capitalize;">{{item?.dishTypes?.[0]}}</ion-card-subtitle>
+          <ion-card-title>{{item.title}}</ion-card-title>
         </ion-card-header>
         <ion-card-content [innerHtml]="item.summary"></ion-card-content>
       </ion-card>

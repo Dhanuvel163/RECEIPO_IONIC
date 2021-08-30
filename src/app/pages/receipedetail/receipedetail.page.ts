@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { LoadingController } from '@ionic/angular';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
 @Component({
   selector: 'app-receipedetail',
   templateUrl: './receipedetail.page.html',
@@ -10,7 +12,9 @@ import { LoadingController } from '@ionic/angular';
 export class ReceipedetailPage implements OnInit {
   receipe:any={}
   darkmode:any = window.matchMedia('(prefers-color-scheme: dark)').matches
-  constructor(public route:ActivatedRoute,public data:DataService,public loadingController: LoadingController) { 
+  constructor(
+    public route:ActivatedRoute,private socialSharing: SocialSharing,
+    public data:DataService,public loadingController: LoadingController) { 
     this.route.paramMap.subscribe((params:any)=>{
       this.getreceipeDetailFunc(params.params.id)
     })
@@ -33,6 +37,50 @@ export class ReceipedetailPage implements OnInit {
     }
   }
 
+
+
+  // // Check if sharing via email is supported
+  // this.socialSharing.canShareViaEmail().then(() => {
+  //   // Sharing via email is possible
+  // }).catch(() => {
+  //   // Sharing via email is not possible
+  // });
+
+  // // Share via email
+  // this.socialSharing.shareViaEmail('Body', 'Subject', ['recipient@example.org']).then(() => {
+  //   // Success!
+  // }).catch(() => {
+  //   // Error!
+  // });
+
+  shareFB(item:any){
+    this.socialSharing.shareViaFacebook('Check this cool receipe !',item.image||'https://spoonacular.com/recipeImages/157106-312x231.jpg',item.sourceUrl || '')
+    .then(()=>console.log('FB share'))
+    .catch((e)=>{
+      this.data.showToast('Please install facebook app to share','danger')
+      // var link = document.createElement('a');
+      // link.href = `https://facebook.com/sharer/sharer.php?u=${item.sourceUrl}`
+      // link.href = `https://twitter.com/intent/tweet/?text=Check this cool receipe !&url=${item.sourceUrl}&image=${item.image}`
+      // link.target = '_blank'
+      // link.click();
+    })
+  }
+
+  shareInsta(item:any){
+    this.socialSharing.shareViaInstagram('Check this cool receipe !',item.image||'https://spoonacular.com/recipeImages/157106-312x231.jpg')
+    .then(()=>console.log('INSTA share'))
+    .catch((e)=>{
+      this.data.showToast('Please install instagram app to share','danger')
+    })
+  }
+
+  shareWhatsapp(item:any){
+    this.socialSharing.shareViaWhatsApp('Check this cool receipe !',item.image||'https://spoonacular.com/recipeImages/157106-312x231.jpg',item.sourceUrl || '')
+    .then(()=>console.log('WHATSAPP share'))
+    .catch((e)=>{
+      this.data.showToast('Please install whatsapp app to share','danger')
+    })
+  }
 }
 
 

@@ -84,13 +84,30 @@
     </div>
   </div>
 
+
+
   <ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="receipe.id">
-    <ion-fab-button color="danger">
-      <ion-icon name="heart" *ngIf="!data.itemExistsinFav(receipe.id);else other_content" (click)="data.favouriteReceipe(receipe)"></ion-icon>
-      <ng-template #other_content>
-        <ion-icon name="heart-dislike" (click)="data.removeFavourite(receipe.id)"></ion-icon>
-      </ng-template>
+    <ion-fab-button color="tertiary">
+      <ion-icon name="share"></ion-icon>
     </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="danger">
+        <ion-icon name="heart" *ngIf="!data.itemExistsinFav(receipe.id);else other_content" (click)="data.favouriteReceipe(receipe)"></ion-icon>
+        <ng-template #other_content>
+          <ion-icon name="heart-dislike" (click)="data.removeFavourite(receipe.id)"></ion-icon>
+        </ng-template>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-facebook" (click)="shareFB(receipe)"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-whatsapp" (click)="shareWhatsapp(receipe)"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-instagram" (click)="shareInsta(receipe)"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
+
 
 </ion-content>
