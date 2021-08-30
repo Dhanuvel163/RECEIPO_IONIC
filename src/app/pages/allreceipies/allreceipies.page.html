@@ -12,6 +12,31 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+  <!-- Default Refresher -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Custom Refresher Properties -->
+  <!-- <ion-content>
+    <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  </ion-content> -->
+
+  <!-- Custom Refresher Content -->
+  <!-- <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="chevron-down-circle-outline"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+  </ion-content> -->
+
   <ion-grid>
   <ion-row>
     <ion-col *ngFor="let item of receipies" size="12" size-sm="6" size-md="4" size-lg="4">

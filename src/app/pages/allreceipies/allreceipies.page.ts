@@ -22,6 +22,15 @@ export class AllreceipiesPage implements OnInit {
   changemode(){
     document.body.classList.toggle('dark')
   }
+  async doRefresh(e:any){
+    await this.refreshrandomreceipies()
+    e.target.complete()
+  }
+  async refreshrandomreceipies(){
+    let res:any =await this.data.getrandomreceipies()
+    this.receipies = res.recipes
+  }
+
   async getrandomreceipies(){
     const loading = await this.loadingController.create({
       message: 'Cooking data 🧑‍🍳'
